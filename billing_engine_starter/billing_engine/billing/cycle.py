@@ -58,7 +58,7 @@ class BillingCycle:
     def run(self, as_of: date) -> BillingResult:
         """Bill all subscriptions whose current period ends on or before `as_of`."""
         # TODO Day 3
-        day --3 cycling-----with self.db.conn as conn:
+      cycling-----with self.db.conn as conn:
             subscriptions = self.subscription_repo.find_due_subscriptions(conn, as_of)
             invoices_created = 0
             invoices_skipped_duplicate = 0
