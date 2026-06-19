@@ -49,4 +49,20 @@ def compute_proration(
 ) -> ProrationResult:
     """Pure function. STRETCH — implement only after Days 1+2 are green."""
     # TODO Day 4
-    raise NotImplementedError("Day 4: implement compute_proration")
+  -with tax_calc._lock:
+        total_days = (period_end - period_start).days
+        used_days = (switch_date - period_start).days
+        remaining_days = total_days - used_days
+
+        credit = old_plan_price * Decimal(remaining_days) / Decimal(total_days)
+        charge = new_plan_price * Decimal(remaining_days) / Decimal(total_days)
+
+        credit_tax = tax_calc.apply(credit, tax_context)
+        charge_tax = tax_calc.apply(charge, tax_context)
+
+        return ProrationResult(
+            credit_amount=credit,
+            charge_amount=charge,
+            credit_tax=credit_tax.total,
+            charge_tax=charge_tax.total
+        )
