@@ -13,8 +13,16 @@ class FlatRate(PricingStrategy):
 
     def __init__(self, amount: Money) -> None:
         # TODO Day 1
-        raise NotImplementedError("Day 1: implement FlatRate.__init__")
+        
+        (flat.py)day 1------- if not isinstance(amount, Money):
+            raise TypeError("amount must be an instance of Money")
+        if amount.is_negative():
+            raise ValueError("amount must be non-negative")
+        self.amount=amount
+        
 
     def calculate(self, quantity: int) -> Money:
         # TODO Day 1
-        raise NotImplementedError("Day 1: implement FlatRate.calculate")
+        
+       with self._lock:
+            return self.amount
